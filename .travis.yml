@@ -33,6 +33,10 @@ matrix:
   allow_failures:
     - jdk: openjdk-ea
 
+before_script:
+  - sudo apt update -y
+  - sudo apt-get install maven
+
 script:
   - mvn -V --no-transfer-progress
 
