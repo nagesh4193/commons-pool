@@ -33,7 +33,7 @@ matrix:
   allow_failures:
     - jdk: openjdk-ea
 
-before_script:
+install:
   - sudo apt-get -y install maven
 
 script:
