@@ -34,11 +34,14 @@ matrix:
     - jdk: openjdk-ea
 
 before_install: 
-# Using the below code as Maven version allowed range is 3.5.0. or above
- - mkdir -p /opt/maven;
- - curl https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz|tar -xz --strip 1 -C /opt/maven;
- - export MAVEN_HOME=/opt/maven;
- - export PATH=${MAVEN_HOME}/bin:${PATH};
+# Using the below code for power support architecture as Maven version allowed range is 3.5.0. or above
+ - |
+   if [[ "$TRAVIS_CPU_ARCH" == "ppc64le" ]]; then
+    mkdir -p /opt/maven;
+    curl https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz|tar -xz --strip 1 -C /opt/maven;
+    export MAVEN_HOME=/opt/maven
+    export PATH=${MAVEN_HOME}/bin:${PATH}
+   fi
 
 script:
   - mvn -V --no-transfer-progress
